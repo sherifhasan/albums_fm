@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'api_config.dart';
 
-class MerchantApi {
+class Api {
   Future<ArtistSearchResponse?> search(String artist) async {
     final client = Dio();
     final url = '${ApiMethods.artistSearch}$artist';
