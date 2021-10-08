@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:appsfactory_task/data/models/artist_search_response.dart';
+import '../../models/artist_search_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
