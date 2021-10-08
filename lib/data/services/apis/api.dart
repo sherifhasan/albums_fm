@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:appsfactory_task/data/models/album_details_response.dart';
 import 'package:appsfactory_task/data/models/artist_top_albums_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -46,6 +47,26 @@ class Api {
     }
     return null;
   }
+
+  Future<AlbumDetailsResponse?> getAlbumDetails(
+      String artist, String albumName) async {
+    final client = Dio();
+    final url = '${ApiMethods.albumDetails}artist=$artist&album=$albumName';
+    try {
+      final response = await client.get(url,
+          options: Options(responseType: ResponseType.json));
+      if (response.statusCode == 200 && response.data != null) {
+        return compute(parseAlbumDetailsResponse, response.data);
+      } else {
+        debugPrint('${response.statusCode} : ${response.data.toString()}');
+      }
+    } on DioError catch (error) {
+      debugPrint(error.message);
+    } finally {
+      client.clear();
+    }
+    return null;
+  }
 }
 
 ArtistSearchResponse parseSearchResponse(response) =>
@@ -53,3 +74,6 @@ ArtistSearchResponse parseSearchResponse(response) =>
 
 ArtistTopAlbums parseArtistTopAlbumsResponse(response) =>
     ArtistTopAlbums.fromJson(response);
+
+AlbumDetailsResponse parseAlbumDetailsResponse(response) =>
+    AlbumDetailsResponse.fromJson(response);
