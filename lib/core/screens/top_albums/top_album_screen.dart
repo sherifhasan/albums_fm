@@ -1,5 +1,6 @@
 import 'package:appsfactory_task/core/models/app_state.dart';
-import 'package:appsfactory_task/core/screens/top_albums/widgets/top_albums_screen_populated_view.dart';
+import 'package:appsfactory_task/core/screens/top_albums/widgets/top_albums_populated_view.dart';
+import 'package:appsfactory_task/core/screens/widgets/empty_view.dart';
 import 'package:appsfactory_task/core/screens/widgets/loading_view.dart';
 import 'package:appsfactory_task/data/models/artist_top_albums_response.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 import '../../../router.dart';
 import '../../../shared/routes.dart';
-import 'widgets/top_albums_screen_empty_view.dart';
 
 class TopAlbumsScreen extends StatelessWidget {
   final String artist;
@@ -40,7 +40,7 @@ class TopAlbumsScreen extends StatelessWidget {
     if (state.isLoading) {
       return const LoadingView();
     } else if (state.artistTopAlbums == const ArtistTopAlbums.empty()) {
-      return const TopAlbumsEmptyView();
+      return const EmptyView();
     } else if (state.artistTopAlbums != const ArtistTopAlbums.empty()) {
       return TopAlbumsScreenPopulatedView(state.artistTopAlbums.albums);
     }
