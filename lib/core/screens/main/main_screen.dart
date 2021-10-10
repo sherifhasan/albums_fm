@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../data/services/navigation/navigation_service.dart';
 import '../../../database_setup.dart';
-import '../../../router.dart';
+import '../../../locator_setup.dart';
 import '../../../shared/routes.dart';
 import 'widgets/main_screen_empty_view.dart';
 import 'widgets/main_screen_populated_view.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  MainScreen({Key? key}) : super(key: key);
+  final navigationService = locator<NavigationService>();
 
   @override
   Widget build(BuildContext context) {

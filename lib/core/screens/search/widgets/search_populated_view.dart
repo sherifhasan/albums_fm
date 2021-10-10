@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/artist.dart';
-import '../../../../router.dart';
+import '../../../../data/services/navigation/navigation_service.dart';
+import '../../../../locator_setup.dart';
 import '../../../../shared/routes.dart';
 import 'search_item.dart';
 
 class SearchPopulatedView extends StatelessWidget {
+  SearchPopulatedView(this.artistsList, {Key? key}) : super(key: key);
+  final navigationService = locator<NavigationService>();
   final List<Artist> artistsList;
-
-  const SearchPopulatedView(this.artistsList, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -31,6 +31,10 @@ class _SearchScreenState extends State<SearchScreen> {
       builder: (BuildContext context, _SearchScreenViewModel vm) {
         return SafeArea(
           child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Search'),
+              centerTitle: true,
+            ),
             body: Flex(direction: Axis.vertical, children: <Widget>[
               Row(
                 children: [

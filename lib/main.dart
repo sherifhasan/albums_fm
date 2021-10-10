@@ -10,6 +10,7 @@ import 'core/middlewares/top_albums_middleware.dart';
 import 'core/models/app_state.dart';
 import 'core/reducers/app_reducer.dart';
 import 'data/repositories/app_repository.dart';
+import 'data/services/navigation/navigation_service.dart';
 import 'database_setup.dart';
 import 'locator_setup.dart';
 import 'shared/routes.dart';
@@ -23,6 +24,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Store<AppState> store;
+  final navigationService = locator<NavigationService>();
 
   MyApp({
     Key? key,

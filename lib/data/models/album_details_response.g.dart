@@ -19,7 +19,7 @@ class AlbumDetailsResponseAdapter extends TypeAdapter<AlbumDetailsResponse> {
     return AlbumDetailsResponse(
       artist: fields[0] as String,
       mbid: fields[4] as String,
-      image: (fields[1] as List).cast<ImageModel>(),
+      imageList: (fields[1] as List).cast<ImageModel>(),
       tracks: fields[3] as Tracks,
       name: fields[2] as String,
     );
@@ -32,7 +32,7 @@ class AlbumDetailsResponseAdapter extends TypeAdapter<AlbumDetailsResponse> {
       ..writeByte(0)
       ..write(obj.artist)
       ..writeByte(1)
-      ..write(obj.image)
+      ..write(obj.imageList)
       ..writeByte(2)
       ..write(obj.name)
       ..writeByte(3)

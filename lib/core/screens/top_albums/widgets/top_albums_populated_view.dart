@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/album.dart';
-import '../../../../router.dart';
+import '../../../../data/services/navigation/navigation_service.dart';
+import '../../../../locator_setup.dart';
 import '../../../../shared/routes.dart';
 import '../../widgets/album_item.dart';
 
 class TopAlbumsScreenPopulatedView extends StatelessWidget {
+  TopAlbumsScreenPopulatedView(this.albums, {Key? key}) : super(key: key);
   final List<Album> albums;
 
-  const TopAlbumsScreenPopulatedView(this.albums, {Key? key}) : super(key: key);
+  final navigationService = locator<NavigationService>();
 
   @override
   Widget build(BuildContext context) {

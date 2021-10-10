@@ -12,7 +12,7 @@ class AlbumDetailsResponse {
     required this.mbid,
     this.tags,
     this.playCount,
-    required this.image,
+    required this.imageList,
     required this.tracks,
     this.url,
     required this.name,
@@ -28,13 +28,13 @@ class AlbumDetailsResponse {
         name = "",
         listeners = "",
         tags = const Tags.empty(),
-        image = const <ImageModel>[],
+        imageList = const <ImageModel>[],
         tracks = const Tracks.empty(),
         wiki = const Wiki.empty();
   @HiveField(0)
   final String artist;
   @HiveField(1)
-  final List<ImageModel> image;
+  final List<ImageModel> imageList;
   @HiveField(2)
   final String name;
   @HiveField(3)
@@ -54,7 +54,7 @@ class AlbumDetailsResponse {
       mbid: json["mbid"],
       tags: Tags.fromJson(json["tags"]),
       playCount: json["playcount"],
-      image: List<ImageModel>.from(
+      imageList: List<ImageModel>.from(
           json["image"].map((x) => ImageModel.fromJson(x))),
       tracks: Tracks.fromJson(json["tracks"]),
       url: json["url"],
@@ -70,7 +70,7 @@ class AlbumDetailsResponse {
           "mbid": mbid,
           "tags": tags?.toJson(),
           "playcount": playCount,
-          "image": List<dynamic>.from(image.map((x) => x.toJson())),
+          "image": List<dynamic>.from(imageList.map((x) => x.toJson())),
           "tracks": tracks.toJson(),
           "url": url,
           "name": name,
