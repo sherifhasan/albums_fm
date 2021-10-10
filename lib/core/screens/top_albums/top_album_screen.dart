@@ -11,9 +11,8 @@ import '../widgets/loading_view.dart';
 import 'widgets/top_albums_populated_view.dart';
 
 class TopAlbumsScreen extends StatelessWidget {
-  final String artist;
-
   const TopAlbumsScreen(this.artist, {Key? key}) : super(key: key);
+  final String artist;
 
   @override
   Widget build(BuildContext context) {
