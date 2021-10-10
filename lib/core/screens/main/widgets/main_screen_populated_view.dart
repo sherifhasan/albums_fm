@@ -12,7 +12,9 @@ class MainScreenPopulatedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, mainAxisSpacing: 2.0),
       itemCount: albums.length,
       itemBuilder: (context, index) {
         var imageUrl =
