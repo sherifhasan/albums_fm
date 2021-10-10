@@ -6,12 +6,13 @@ import '../models/artist_top_albums_response.dart';
 import 'data_source.dart';
 
 class RemoteDataSourceProvider implements DataSourceProviderI {
-  final Api _api = Api();
+  final Api _api;
+
+  RemoteDataSourceProvider(this._api);
 
   @override
-  Future<AlbumDetailsResponse?> getAlbumDetails(
-      String artist, String albumName) {
-    return _api.getAlbumDetails(artist, albumName);
+  Future<AlbumDetailsResponse?> getAlbumDetails(String mbid) {
+    return _api.getAlbumDetails(mbid);
   }
 
   @override
