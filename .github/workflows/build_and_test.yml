@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-          repository: albums_fm
+          repository: sherifhasan/albums_fm
     - uses: actions/setup-java@v1
       with:
         java-version: '12.x'
