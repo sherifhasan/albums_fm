@@ -7,6 +7,5 @@ abstract class DataSourceProviderI {
 
   Future<ArtistTopAlbums?> getTopAlbums(String artist);
 
-  Future<AlbumDetailsResponse?> getAlbumDetails(
-      String artist, String albumName);
+  Future<AlbumDetailsResponse?> getAlbumDetails(String mbid);
 }

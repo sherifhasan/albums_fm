@@ -48,10 +48,9 @@ class Api {
     return null;
   }
 
-  Future<AlbumDetailsResponse?> getAlbumDetails(
-      String artist, String albumName) async {
+  Future<AlbumDetailsResponse?> getAlbumDetails(String mbid) async {
     final client = Dio();
-    final url = '${ApiMethods.albumDetails}artist=$artist&album=$albumName';
+    final url = '${ApiMethods.albumDetails}mbid=$mbid';
     try {
       final response = await client.get(url,
           options: Options(responseType: ResponseType.json));

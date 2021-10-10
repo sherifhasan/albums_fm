@@ -1,15 +1,15 @@
 import '../data_sources/data_source.dart';
-import '../data_sources/remote_data_source.dart';
 import '../models/album_details_response.dart';
 import '../models/artist_search_response.dart';
 import '../models/artist_top_albums_response.dart';
 
 class AppRepository {
-  final DataSourceProviderI _remoteDataSource = RemoteDataSourceProvider();
+  AppRepository(this._remoteDataSource);
 
-  Future<AlbumDetailsResponse?> getAlbumDetails(
-      String artist, String albumName) {
-    return _remoteDataSource.getAlbumDetails(artist, albumName);
+  final DataSourceProviderI _remoteDataSource;
+
+  Future<AlbumDetailsResponse?> getAlbumDetails(String mbid) {
+    return _remoteDataSource.getAlbumDetails(mbid);
   }
 
   Future<ArtistTopAlbums?> getTopAlbums(String artist) {
