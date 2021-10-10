@@ -3,7 +3,6 @@ import 'package:appsfactory_task/core/models/app_state.dart';
 import 'package:appsfactory_task/core/screens/search/widgets/search_populated_view.dart';
 import 'package:appsfactory_task/core/screens/widgets/loading_view.dart';
 import 'package:appsfactory_task/data/models/artist_search_response.dart';
-import 'package:appsfactory_task/data/models/artist_top_albums_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -35,26 +34,28 @@ class _SearchScreenState extends State<SearchScreen> {
             body: Flex(direction: Axis.vertical, children: <Widget>[
               Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    child: TextField(
-                      controller: searchController,
-                      decoration: const InputDecoration(
-                          labelText: 'Search artist...',
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.blue,
-                              width: 2.0,
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      child: TextField(
+                        controller: searchController,
+                        decoration: const InputDecoration(
+                            labelText: 'Search artist...',
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.blue,
+                                width: 2.0,
+                              ),
                             ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black54,
-                              width: 2.0,
-                            ),
-                          )),
-                      style: const TextStyle(
-                        fontSize: 16.0,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black54,
+                                width: 2.0,
+                              ),
+                            )),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                        ),
                       ),
                     ),
                   ),
@@ -83,7 +84,8 @@ class _SearchScreenState extends State<SearchScreen> {
     } else if (state.artistSearchResponse ==
         const ArtistSearchResponse.empty()) {
       return const EmptyView();
-    } else if (state.artistTopAlbums != const ArtistTopAlbums.empty()) {
+    } else if (state.artistSearchResponse !=
+        const ArtistSearchResponse.empty()) {
       return SearchPopulatedView(
           state.artistSearchResponse.artistMatches.artistsList);
     }
