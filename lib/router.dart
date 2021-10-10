@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'core/screens/main/main_screen.dart';
 import 'core/screens/search/search_screen.dart';
-import 'core/screens/top_albums/top_albums_screen.dart';
+import 'core/screens/top_albums/top_album_screen.dart';
 import 'data/services/navigation/navigation_service.dart';
 import 'data/services/navigation/navigation_service_impl.dart';
 import 'shared/routes.dart';
