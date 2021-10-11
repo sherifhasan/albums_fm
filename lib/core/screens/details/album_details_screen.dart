@@ -116,10 +116,11 @@ class AlbumDetailsScreen extends StatelessWidget {
                               fontWeight: FontWeight.w700),
                         ),
                         const SizedBox(height: 8),
-                        if (album.tracks != null)
+                        if (album.tracks != null &&
+                            album.tracks!.tracksList != null)
                           SizedBox(
                               height: 250,
-                              child: TracksList(album.tracks!.tracksList)),
+                              child: TracksList(album.tracks!.tracksList!)),
                         if (album.tracks == null)
                           const Padding(
                             padding: EdgeInsets.all(8.0),
