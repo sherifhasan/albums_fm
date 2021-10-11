@@ -25,19 +25,19 @@ class TopAlbumsScreen extends StatelessWidget {
               title: Text(artist),
               centerTitle: true,
             ),
-            body: _buildVisible(store.state),
+            body: _buildVisible(store),
           );
         });
   }
 
-  Widget _buildVisible(AppState state) {
-    if (state.isLoading) {
+  Widget _buildVisible(Store<AppState> store) {
+    if (store.state.isLoading) {
       return const LoadingView();
-    } else if (state.artistTopAlbums == const ArtistTopAlbums.empty()) {
+    } else if (store.state.artistTopAlbums == const ArtistTopAlbums.empty()) {
       return const EmptyView();
-    } else if (state.artistTopAlbums != const ArtistTopAlbums.empty()) {
-      return TopAlbumsScreenPopulatedView(state.artistTopAlbums.albums);
+    } else if (store.state.artistTopAlbums != const ArtistTopAlbums.empty()) {
+      return TopAlbumsScreenPopulatedView(store.state.artistTopAlbums.albums,store);
     }
-    throw ArgumentError('No view for state: $state');
+    throw ArgumentError('No view for state: ${store.state}');
   }
 }
