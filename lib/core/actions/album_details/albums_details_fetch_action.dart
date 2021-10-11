@@ -1,5 +1,6 @@
 class AlbumDetailsFetchAction {
-  final String mbid;
+  final String artist;
+  final String albumName;
 
-  AlbumDetailsFetchAction(this.mbid);
+  AlbumDetailsFetchAction(this.artist, this.albumName);
 }

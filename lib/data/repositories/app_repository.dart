@@ -8,8 +8,9 @@ class AppRepository {
 
   final DataSourceProviderI _remoteDataSource;
 
-  Future<AlbumDetailsResponse?> getAlbumDetails(String mbid) {
-    return _remoteDataSource.getAlbumDetails(mbid);
+  Future<AlbumDetailsResponse?> getAlbumDetails(
+      String artist, String albumName) {
+    return _remoteDataSource.getAlbumDetails(artist, albumName);
   }
 
   Future<ArtistTopAlbums?> getTopAlbums(String artist) {

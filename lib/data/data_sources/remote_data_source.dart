@@ -11,8 +11,9 @@ class RemoteDataSourceProvider implements DataSourceProviderI {
   RemoteDataSourceProvider(this._api);
 
   @override
-  Future<AlbumDetailsResponse?> getAlbumDetails(String mbid) {
-    return _api.getAlbumDetails(mbid);
+  Future<AlbumDetailsResponse?> getAlbumDetails(
+      String artist, String albumName) {
+    return _api.getAlbumDetails(artist, albumName);
   }
 
   @override
