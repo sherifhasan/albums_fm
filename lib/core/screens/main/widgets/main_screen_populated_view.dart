@@ -1,4 +1,4 @@
-import 'package:appsfactory_task/core/actions/album_details/albums_details_fetch_action.dart';
+import '../../../actions/album_details/albums_details_fetch_action.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
@@ -27,8 +27,8 @@ class MainScreenPopulatedView extends StatelessWidget {
       itemBuilder: (context, index) {
         var imageUrl =
             "https://via.placeholder.com/300x300?text=No%20Image%20found";
-        if (albums[index].imageList[3].text != null) {
-          imageUrl = albums[index].imageList[3].text!;
+        if (albums[index].imageList![3].text != null) {
+          imageUrl = albums[index].imageList![3].text!;
         }
         return AlbumItem(albums[index].name, imageUrl, openDetails: () async {
           if (await isInternetConnected()) {
