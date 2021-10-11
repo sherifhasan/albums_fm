@@ -39,14 +39,16 @@ void Function(
     _timer = Timer(const Duration(milliseconds: 250), () {
       _operation = CancelableOperation.fromFuture(repository
           .getAlbumDetails(action.artist, action.albumName)
-          .then((result) => store..dispatch(AlbumDetailsLoadAction(result))));
-      if (store.state.albumDetailsResponse !=
-          const AlbumDetailsResponse.empty()) {
-        _navigationService.pushNamed(
-          RoutePaths.details,
-          arguments: store.state.albumDetailsResponse,
-        );
-      }
+          .then((result) => store..dispatch(AlbumDetailsLoadAction(result)))
+          .whenComplete(() {
+        if (store.state.albumDetailsResponse !=
+            const AlbumDetailsResponse.empty()) {
+          _navigationService.pushNamed(
+            RoutePaths.details,
+            arguments: store.state.albumDetailsResponse,
+          );
+        }
+      }));
     });
   };
 }
