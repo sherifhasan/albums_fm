@@ -1,14 +1,20 @@
-import 'package:appsfactory_task/data/services/navigation/navigation_service.dart';
-import 'package:appsfactory_task/locator_setup.dart';
+import 'package:appsfactory_task/core/actions/album_details/albums_details_fetch_action.dart';
 import 'package:flutter/material.dart';
+import 'package:redux/redux.dart';
 
 import '../../../../data/models/album_details_response.dart';
+import '../../../../data/services/navigation/navigation_service.dart';
+import '../../../../locator_setup.dart';
 import '../../../../shared/routes.dart';
+import '../../../../shared/utlis.dart';
+import '../../../models/app_state.dart';
 import '../../widgets/album_item.dart';
 
 class MainScreenPopulatedView extends StatelessWidget {
-  MainScreenPopulatedView(this.albums, {Key? key}) : super(key: key);
+  MainScreenPopulatedView(this.albums, this.store, {Key? key})
+      : super(key: key);
   final List<AlbumDetailsResponse> albums;
+  final Store<AppState> store;
 
   final navigationService = locator<NavigationService>();
 
@@ -24,11 +30,17 @@ class MainScreenPopulatedView extends StatelessWidget {
         if (albums[index].imageList[3].text != null) {
           imageUrl = albums[index].imageList[3].text!;
         }
-        return AlbumItem(albums[index].name, imageUrl,
-            openDetails: () => navigationService.pushNamed(
-                  RoutePaths.details,
-                  arguments: albums[index],
-                ));
+        return AlbumItem(albums[index].name, imageUrl, openDetails: () async {
+          if (await isInternetConnected()) {
+            store.dispatch(AlbumDetailsFetchAction(
+                albums[index].artist, albums[index].name));
+          } else {
+            navigationService.pushNamed(
+              RoutePaths.details,
+              arguments: albums[index],
+            );
+          }
+        });
       },
     );
   }
