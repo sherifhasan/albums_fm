@@ -20,8 +20,8 @@ class AlbumDetailsResponseAdapter extends TypeAdapter<AlbumDetailsResponse> {
       artist: fields[0] as String,
       mbid: fields[4] as String,
       imageList: (fields[1] as List).cast<ImageModel>(),
-      tracks: fields[3] as Tracks,
       name: fields[2] as String,
+      tracks: fields[3] as Tracks?,
     );
   }
 

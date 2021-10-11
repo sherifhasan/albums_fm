@@ -10,12 +10,12 @@ class AlbumDetailsResponse {
   AlbumDetailsResponse({
     required this.artist,
     required this.mbid,
-    this.tags,
-    this.playCount,
     required this.imageList,
-    required this.tracks,
-    this.url,
     required this.name,
+    this.tracks,
+    this.tags,
+    this.url,
+    this.playCount,
     this.listeners,
     this.wiki,
   });
@@ -38,7 +38,7 @@ class AlbumDetailsResponse {
   @HiveField(2)
   final String name;
   @HiveField(3)
-  final Tracks tracks;
+  final Tracks? tracks;
   @HiveField(4)
   final String mbid;
   final Tags? tags;
@@ -52,15 +52,17 @@ class AlbumDetailsResponse {
     return AlbumDetailsResponse(
       artist: json["artist"],
       mbid: json["mbid"],
-      tags: Tags.fromJson(json["tags"]),
+      tags: json["tags"] != null && json["tags"] != ''
+          ? Tags.fromJson(json["tags"])
+          : null,
       playCount: json["playcount"],
       imageList: List<ImageModel>.from(
           json["image"].map((x) => ImageModel.fromJson(x))),
-      tracks: Tracks.fromJson(json["tracks"]),
+      tracks: json["tracks"] != null ? Tracks.fromJson(json["tracks"]) : null,
       url: json["url"],
       name: json["name"],
       listeners: json["listeners"],
-      wiki: Wiki.fromJson(json["wiki"]),
+      wiki: json["wiki"] != null ? Wiki.fromJson(json["wiki"]) : null,
     );
   }
 
@@ -71,7 +73,7 @@ class AlbumDetailsResponse {
           "tags": tags?.toJson(),
           "playcount": playCount,
           "image": List<dynamic>.from(imageList.map((x) => x.toJson())),
-          "tracks": tracks.toJson(),
+          "tracks": tracks?.toJson(),
           "url": url,
           "name": name,
           "listeners": listeners,
@@ -128,7 +130,8 @@ class Tracks {
   final List<Track> tracksList;
 
   factory Tracks.fromJson(Map<String, dynamic> json) => Tracks(
-        tracksList: List<Track>.from(json["track"].map((x) => Track.fromJson(x))),
+        tracksList:
+            List<Track>.from(json["track"].map((x) => Track.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
