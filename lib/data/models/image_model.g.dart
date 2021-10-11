@@ -1,38 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'track.dart';
+part of 'image_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TrackAdapter extends TypeAdapter<Track> {
+class ImageModelAdapter extends TypeAdapter<ImageModel> {
   @override
-  final int typeId = 3;
+  final int typeId = 2;
 
   @override
-  Track read(BinaryReader reader) {
+  ImageModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Track(
-      duration: fields[2] as int,
-      url: fields[0] as String,
-      name: fields[1] as String,
+    return ImageModel(
+      size: fields[0] as String,
+      text: fields[1] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Track obj) {
+  void write(BinaryWriter writer, ImageModel obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.url)
-      ..writeByte(1)
-      ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.duration);
+      ..writeByte(0)
+      ..write(obj.size)
+      ..writeByte(1)
+      ..write(obj.text);
   }
 
   @override
@@ -41,7 +38,7 @@ class TrackAdapter extends TypeAdapter<Track> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TrackAdapter &&
+      other is ImageModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

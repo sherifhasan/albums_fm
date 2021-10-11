@@ -4,7 +4,7 @@ class Artist {
   Artist({
     required this.name,
     required this.listeners,
-    required this.mbid,
+    this.mbid,
     required this.url,
     required this.streamable,
     required this.image,
@@ -12,7 +12,7 @@ class Artist {
 
   final String name;
   final String? listeners;
-  final String mbid;
+  final String? mbid;
   final String? url;
   final String? streamable;
   final List<ImageModel>? image;

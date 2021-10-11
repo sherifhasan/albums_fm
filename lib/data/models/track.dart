@@ -5,7 +5,7 @@ import 'artist.dart';
 
 part 'track.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 3)
 class Track {
   Track({
     this.streamable,
