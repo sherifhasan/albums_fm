@@ -30,8 +30,9 @@ class SearchItem extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
                         child: CachedNetworkImage(
-                          imageUrl: artist.image![3].text ??
-                              "https://via.placeholder.com/300x300?text=No%20Image%20found",
+                          imageUrl: artist.image![3].text!.isEmpty
+                              ? "https://via.placeholder.com/300x300?text=No%20Image%20found"
+                              : artist.image![3].text!,
                           fit: BoxFit.fitWidth,
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) => Center(
