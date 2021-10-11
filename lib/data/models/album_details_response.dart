@@ -122,20 +122,23 @@ class Tag {
 
 class Tracks {
   Tracks({
-    required this.tracksList,
+    this.tracksList,
   });
 
   const Tracks.empty() : tracksList = const <Track>[];
 
-  final List<Track> tracksList;
+  final List<Track>? tracksList;
 
   factory Tracks.fromJson(Map<String, dynamic> json) => Tracks(
-        tracksList:
-            List<Track>.from(json["track"].map((x) => Track.fromJson(x))),
+        tracksList: json["track"] != null
+            ? List<Track>.from(json["track"].map((x) => Track.fromJson(x)))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
-        "track": List<dynamic>.from(tracksList.map((x) => x.toJson())),
+        "track": tracksList != null
+            ? List<dynamic>.from(tracksList!.map((x) => x.toJson()))
+            : null,
       };
 }
 
