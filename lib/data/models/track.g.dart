@@ -8,7 +8,7 @@ part of 'track.dart';
 
 class TrackAdapter extends TypeAdapter<Track> {
   @override
-  final int typeId = 3;
+  final int typeId = 2;
 
   @override
   Track read(BinaryReader reader) {

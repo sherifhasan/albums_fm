@@ -8,7 +8,7 @@ part of 'image_model.dart';
 
 class ImageModelAdapter extends TypeAdapter<ImageModel> {
   @override
-  final int typeId = 2;
+  final int typeId = 3;
 
   @override
   ImageModel read(BinaryReader reader) {

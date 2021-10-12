@@ -3,11 +3,11 @@ import 'image_model.dart';
 class Artist {
   Artist({
     required this.name,
-    required this.listeners,
+    this.streamable,
+    this.listeners,
     this.mbid,
-    required this.url,
-    required this.streamable,
-    required this.image,
+    this.image,
+    this.url,
   });
 
   final String name;
@@ -16,6 +16,14 @@ class Artist {
   final String? url;
   final String? streamable;
   final List<ImageModel>? image;
+
+  Artist.empty()
+      : name = "",
+        listeners = "",
+        mbid = "",
+        streamable = "",
+        url = "",
+        image = const <ImageModel>[];
 
   factory Artist.fromJson(Map<String, dynamic> json) => Artist(
         name: json["name"],
