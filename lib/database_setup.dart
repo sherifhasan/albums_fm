@@ -1,3 +1,4 @@
+import 'package:appsfactory_task/data/models/track.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -9,5 +10,6 @@ Box<AlbumDetailsResponse> favouriteBox =
 Future<void> setupDatabase() async {
   await Hive.initFlutter();
   Hive.registerAdapter(AlbumDetailsResponseAdapter());
+  Hive.registerAdapter(TrackAdapter());
   await Hive.openBox<AlbumDetailsResponse>("favourites");
 }

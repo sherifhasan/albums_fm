@@ -7,18 +7,18 @@ part 'album_details_response.g.dart';
 
 @HiveType(typeId: 1)
 class AlbumDetailsResponse {
-  AlbumDetailsResponse({
-    required this.artist,
-    required this.mbid,
-    required this.imageList,
-    required this.name,
-    this.tracks,
-    this.tags,
-    this.url,
-    this.playCount,
-    this.listeners,
-    this.wiki,
-  });
+  AlbumDetailsResponse(
+      {required this.artist,
+      required this.mbid,
+      required this.name,
+      this.tracks,
+      this.imageList,
+      this.tags,
+      this.url,
+      this.playCount,
+      this.listeners,
+      this.wiki,
+      this.imagePath});
 
   const AlbumDetailsResponse.empty()
       : artist = "",
@@ -27,21 +27,26 @@ class AlbumDetailsResponse {
         url = "",
         name = "",
         listeners = "",
-        tags = const Tags.empty(),
+        tags = const <Tag>[],
         imageList = const <ImageModel>[],
-        tracks = const Tracks.empty(),
+        tracks = const <Track>[],
+        imagePath = "",
         wiki = const Wiki.empty();
   @HiveField(0)
   final String artist;
+
   @HiveField(1)
-  final List<ImageModel> imageList;
-  @HiveField(2)
   final String name;
+  @HiveField(2)
+  final List<Track>? tracks;
   @HiveField(3)
-  final Tracks? tracks;
-  @HiveField(4)
   final String mbid;
-  final Tags? tags;
+  @HiveField(4)
+  final String? imagePath;
+
+  // @HiveField(4)
+  final List<ImageModel>? imageList;
+  final List<Tag>? tags;
   final String? playCount;
   final String? url;
   final String? listeners;
@@ -53,13 +58,19 @@ class AlbumDetailsResponse {
       artist: json["artist"],
       mbid: json["mbid"],
       tags: json["tags"] != null && json["tags"] != ''
-          ? Tags.fromJson(json["tags"])
+          ? List<Tag>.from(json["tags"]["tag"].map((x) => Tag.fromJson(x)))
           : null,
       playCount: json["playcount"],
-      imageList: List<ImageModel>.from(
-          json["image"].map((x) => ImageModel.fromJson(x))),
-      tracks: json["tracks"] != null ? Tracks.fromJson(json["tracks"]) : null,
+      imageList: json["image"] != null
+          ? List<ImageModel>.from(
+              json["image"].map((x) => ImageModel.fromJson(x)))
+          : null,
+      tracks: json["tracks"] != null
+          ? List<Track>.from(
+              json["tracks"]["track"].map((x) => Track.fromJson(x)))
+          : null,
       url: json["url"],
+      imagePath: json["imagePath"],
       name: json["name"],
       listeners: json["listeners"],
       wiki: json["wiki"] != null ? Wiki.fromJson(json["wiki"]) : null,
@@ -70,33 +81,26 @@ class AlbumDetailsResponse {
         "album": {
           "artist": artist,
           "mbid": mbid,
-          "tags": tags?.toJson(),
           "playcount": playCount,
-          "image": List<dynamic>.from(imageList.map((x) => x.toJson())),
-          "tracks": tracks?.toJson(),
+          "image": imageList != null
+              ? List<dynamic>.from(imageList!.map((x) => x.toJson()))
+              : null,
+          "tracks": {
+            "track": tracks != null
+                ? List<dynamic>.from(tracks!.map((x) => x.toJson()))
+                : null
+          },
+          "tags": {
+            "tag": tags != null
+                ? List<dynamic>.from(tags!.map((x) => x.toJson()))
+                : null
+          },
           "url": url,
           "name": name,
           "listeners": listeners,
           "wiki": wiki?.toJson(),
+          "imagePath": imagePath
         }
-      };
-}
-
-class Tags {
-  Tags({
-    required this.tag,
-  });
-
-  const Tags.empty() : tag = const <Tag>[];
-
-  final List<Tag> tag;
-
-  factory Tags.fromJson(Map<String, dynamic> json) => Tags(
-        tag: List<Tag>.from(json["tag"].map((x) => Tag.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "tag": List<dynamic>.from(tag.map((x) => x.toJson())),
       };
 }
 
@@ -117,28 +121,6 @@ class Tag {
   Map<String, dynamic> toJson() => {
         "url": url,
         "name": name,
-      };
-}
-
-class Tracks {
-  Tracks({
-    this.tracksList,
-  });
-
-  const Tracks.empty() : tracksList = const <Track>[];
-
-  final List<Track>? tracksList;
-
-  factory Tracks.fromJson(Map<String, dynamic> json) => Tracks(
-        tracksList: json["track"] != null
-            ? List<Track>.from(json["track"].map((x) => Track.fromJson(x)))
-            : null,
-      );
-
-  Map<String, dynamic> toJson() => {
-        "track": tracksList != null
-            ? List<dynamic>.from(tracksList!.map((x) => x.toJson()))
-            : null,
       };
 }
 
