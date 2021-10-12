@@ -1,13 +1,13 @@
-import 'package:appsfactory_task/core/actions/search/search_fetch_action.dart';
-import 'package:appsfactory_task/core/models/app_state.dart';
-import 'package:appsfactory_task/core/screens/search/widgets/search_populated_view.dart';
-import 'package:appsfactory_task/core/screens/widgets/loading_view.dart';
-import 'package:appsfactory_task/data/models/artist_search_response.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
+import '../../../data/models/artist_search_response.dart';
+import '../../actions/search/search_fetch_action.dart';
+import '../../models/app_state.dart';
 import '../widgets/empty_view.dart';
+import '../widgets/loading_view.dart';
+import 'widgets/search_populated_view.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -43,6 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       padding: const EdgeInsets.all(8),
                       child: TextField(
                         controller: searchController,
+                        autofocus: true,
                         decoration: const InputDecoration(
                             labelText: 'Search artist...',
                             focusedBorder: OutlineInputBorder(
