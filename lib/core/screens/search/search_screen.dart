@@ -41,22 +41,18 @@ class _SearchScreenState extends State<SearchScreen> {
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.all(8),
+                      margin: const EdgeInsets.all(8),
                       child: TextField(
                         controller: searchController,
                         autofocus: true,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                             labelText: 'Search artist...',
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.blue,
-                                width: 2.0,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black54,
-                                width: 2.0,
-                              ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                  color: Colors.black54,
+                                  width: 2.0,
+                                  style: BorderStyle.solid),
                             )),
                         style: const TextStyle(
                           fontSize: 16.0,
