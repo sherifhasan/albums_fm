@@ -18,17 +18,16 @@ class AlbumDetailsResponseAdapter extends TypeAdapter<AlbumDetailsResponse> {
     };
     return AlbumDetailsResponse(
       artist: fields[0] as String,
-      mbid: fields[3] as String,
       name: fields[1] as String,
       tracks: (fields[2] as List?)?.cast<Track>(),
-      imagePath: fields[4] as String,
+      imageList: (fields[3] as List?)?.cast<ImageModel>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, AlbumDetailsResponse obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.artist)
       ..writeByte(1)
@@ -36,9 +35,7 @@ class AlbumDetailsResponseAdapter extends TypeAdapter<AlbumDetailsResponse> {
       ..writeByte(2)
       ..write(obj.tracks)
       ..writeByte(3)
-      ..write(obj.mbid)
-      ..writeByte(4)
-      ..write(obj.imagePath);
+      ..write(obj.imageList);
   }
 
   @override

@@ -30,8 +30,8 @@ class AppState {
             albumDetailsResponse ?? this.albumDetailsResponse);
   }
 
-  void setLoading() {
-    isLoading = !isLoading;
+  void setLoading(bool isLoading) {
+    this.isLoading = isLoading;
   }
 
   @override

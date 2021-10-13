@@ -1,11 +1,9 @@
-import 'dart:async';
-
-import 'package:appsfactory_task/core/actions/top_albums/top_albums_fetch_action.dart';
-import 'package:appsfactory_task/core/actions/top_albums/top_albums_load_action.dart';
-import 'package:appsfactory_task/data/repositories/app_repository.dart';
 import 'package:async/async.dart';
 import 'package:redux/redux.dart';
 
+import '../../data/repositories/app_repository.dart';
+import '../actions/top_albums/top_albums_fetch_action.dart';
+import '../actions/top_albums/top_albums_load_action.dart';
 import '../models/app_state.dart';
 
 Middleware<AppState> createStoreTopAlbumsMiddleware(
@@ -23,18 +21,15 @@ void Function(
 ) _fetchTopAlbums(
   AppRepository repository,
 ) {
-  Timer? _timer;
   CancelableOperation<Store<AppState>>? _operation;
   return (store, action, next) {
     next(action);
 
-    _timer?.cancel();
     _operation?.cancel();
-    store.state.setLoading();
-    _timer = Timer(const Duration(milliseconds: 250), () {
-      _operation = CancelableOperation.fromFuture(repository
-          .getTopAlbums(action.artist)
-          .then((result) => store..dispatch(TopAlbumsLoadAction(result))));
-    });
+    store.state.setLoading(true);
+    _operation = CancelableOperation.fromFuture(repository
+        .getTopAlbums(action.artist)
+        .then((result) => store..dispatch(TopAlbumsLoadAction(result)))
+        .whenComplete(() => store.state.setLoading(false)));
   };
 }

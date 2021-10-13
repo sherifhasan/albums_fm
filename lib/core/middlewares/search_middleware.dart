@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:appsfactory_task/core/actions/search/search_fetch_action.dart';
 import 'package:appsfactory_task/core/actions/search/search_load_action.dart';
 import 'package:appsfactory_task/data/repositories/app_repository.dart';
@@ -23,18 +21,15 @@ void Function(
 ) _search(
   AppRepository repository,
 ) {
-  Timer? _timer;
   CancelableOperation<Store<AppState>>? _operation;
   return (store, action, next) {
     next(action);
 
-    _timer?.cancel();
     _operation?.cancel();
-    store.state.setLoading();
-    _timer = Timer(const Duration(milliseconds: 250), () {
-      _operation = CancelableOperation.fromFuture(repository
-          .search(action.artist)
-          .then((result) => store..dispatch(SearchLoadAction(result))));
-    });
+    store.state.setLoading(true);
+    _operation = CancelableOperation.fromFuture(repository
+        .search(action.artist)
+        .then((result) => store..dispatch(SearchLoadAction(result)))
+        .whenComplete(() => store.state.setLoading(false)));
   };
 }

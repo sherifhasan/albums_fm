@@ -7,18 +7,18 @@ part 'album_details_response.g.dart';
 
 @HiveType(typeId: 1)
 class AlbumDetailsResponse {
-  AlbumDetailsResponse(
-      {required this.artist,
-      required this.mbid,
-      required this.name,
-      this.tracks,
-      this.imageList,
-      this.tags,
-      this.url,
-      this.playCount,
-      this.listeners,
-      this.wiki,
-      this.imagePath});
+  AlbumDetailsResponse({
+    required this.artist,
+    required this.name,
+    this.tracks,
+    this.mbid,
+    this.imageList,
+    this.tags,
+    this.url,
+    this.playCount,
+    this.listeners,
+    this.wiki,
+  });
 
   const AlbumDetailsResponse.empty()
       : artist = "",
@@ -30,8 +30,8 @@ class AlbumDetailsResponse {
         tags = const <Tag>[],
         imageList = const <ImageModel>[],
         tracks = const <Track>[],
-        imagePath = "",
         wiki = const Wiki.empty();
+
   @HiveField(0)
   final String artist;
 
@@ -39,12 +39,9 @@ class AlbumDetailsResponse {
   final String name;
   @HiveField(2)
   final List<Track>? tracks;
-  @HiveField(3)
-  final String mbid;
-  @HiveField(4)
-  final String? imagePath;
+  final String? mbid;
 
-  // @HiveField(4)
+  @HiveField(3)
   final List<ImageModel>? imageList;
   final List<Tag>? tags;
   final String? playCount;
@@ -70,7 +67,6 @@ class AlbumDetailsResponse {
               json["tracks"]["track"].map((x) => Track.fromJson(x)))
           : null,
       url: json["url"],
-      imagePath: json["imagePath"],
       name: json["name"],
       listeners: json["listeners"],
       wiki: json["wiki"] != null ? Wiki.fromJson(json["wiki"]) : null,
@@ -99,7 +95,6 @@ class AlbumDetailsResponse {
           "name": name,
           "listeners": listeners,
           "wiki": wiki?.toJson(),
-          "imagePath": imagePath
         }
       };
 }

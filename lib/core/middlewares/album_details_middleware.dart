@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:async/async.dart';
 import 'package:redux/redux.dart';
 
@@ -27,28 +25,26 @@ void Function(
 ) _fetchAlbumDetails(
   AppRepository repository,
 ) {
-  Timer? _timer;
   CancelableOperation<Store<AppState>>? _operation;
   NavigationService _navigationService = locator<NavigationService>();
   return (store, action, next) {
     next(action);
 
-    _timer?.cancel();
     _operation?.cancel();
-    store.state.setLoading();
-    _timer = Timer(const Duration(milliseconds: 250), () {
-      _operation = CancelableOperation.fromFuture(repository
-          .getAlbumDetails(action.artist, action.albumName)
-          .then((result) => store..dispatch(AlbumDetailsLoadAction(result)))
-          .whenComplete(() {
-        if (store.state.albumDetailsResponse !=
-            const AlbumDetailsResponse.empty()) {
-          _navigationService.pushNamed(
-            RoutePaths.details,
-            arguments: store.state.albumDetailsResponse,
-          );
-        }
-      }));
-    });
+    store.state.setLoading(true);
+
+    _operation = CancelableOperation.fromFuture(repository
+        .getAlbumDetails(action.artist, action.albumName)
+        .then((result) => store..dispatch(AlbumDetailsLoadAction(result)))
+        .whenComplete(() {
+      if (store.state.albumDetailsResponse !=
+          const AlbumDetailsResponse.empty()) {
+        _navigationService.pushNamed(
+          RoutePaths.details,
+          arguments: store.state.albumDetailsResponse,
+        );
+        store.state.setLoading(false);
+      }
+    }));
   };
 }
