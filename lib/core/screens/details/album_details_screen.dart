@@ -1,5 +1,3 @@
-import 'package:appsfactory_task/core/actions/database/database_action.dart';
-import 'package:appsfactory_task/database_setup.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +6,10 @@ import 'package:redux/redux.dart';
 
 import '../../../data/models/album_details_response.dart';
 import '../../../data/services/navigation/navigation_service.dart';
+import '../../../database_setup.dart';
 import '../../../locator_setup.dart';
+import '../../../shared/constants.dart';
+import '../../actions/database/database_action.dart';
 import '../../models/app_state.dart';
 import 'widgets/tracks_list.dart';
 
@@ -63,12 +64,12 @@ class AlbumDetailsScreen extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) => Image.asset(
-                              "assets/image_not_found.png",
+                              AppImages.assetsNotAvailableImage,
                               height: 100,
                             ),
                           )
                         : Image.asset(
-                            "assets/image_not_found.png",
+                            AppImages.assetsNotAvailableImage,
                             height: 100,
                           )),
               ),
@@ -78,7 +79,7 @@ class AlbumDetailsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               album.tracks != null
-                  ? Expanded(flex:1,child: TracksList(album.tracks!))
+                  ? Expanded(flex: 1, child: TracksList(album.tracks!))
                   : const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(

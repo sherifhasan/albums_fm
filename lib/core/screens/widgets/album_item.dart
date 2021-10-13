@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../shared/constants.dart';
+
 class AlbumItem extends StatelessWidget {
   const AlbumItem(this.albumName,
       {Key? key, this.networkImageUrl, this.openDetails})
@@ -47,12 +49,12 @@ class AlbumItem extends StatelessWidget {
                                 ),
                                 errorWidget: (context, url, error) =>
                                     Image.asset(
-                                  "assets/image_not_found.png",
+                                  AppImages.assetsNotAvailableImage,
                                   height: 100,
                                 ),
                               )
                             : Image.asset(
-                                "assets/image_not_found.png",
+                                AppImages.assetsNotAvailableImage,
                                 height: 100,
                               ),
                       ),
