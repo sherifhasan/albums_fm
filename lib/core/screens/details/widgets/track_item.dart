@@ -10,46 +10,54 @@ class TrackItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black, width: 2),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  track.name,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      margin: const EdgeInsets.all(10),
+      elevation: 8,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    track.name,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 15),
+                Text(
+                  (track.duration / 60).toStringAsFixed(2),
                   style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
+              ],
+            ),
+            GestureDetector(
+              child: Text(
+                track.url,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                    color: Colors.blue, decoration: TextDecoration.underline),
               ),
-              const SizedBox(width: 15),
-              Text(
-                (track.duration / 60).toStringAsFixed(2),
-                style: const TextStyle(fontSize: 18, color: Colors.white),
-              ),
-            ],
-          ),
-          GestureDetector(
-            onTap: () async {
-              if (await canLaunch(track.url)) {
-                launch(track.url);
-              } else {
-                Fluttertoast.showToast(
-                    msg: 'Could not open the track.',
-                    fontSize: 14,
-                    toastLength: Toast.LENGTH_LONG,
-                    timeInSecForIosWeb: 2,
-                    textColor: Colors.white,
-                    backgroundColor: Colors.redAccent);
-              }
-            },
-          )
-        ],
+              onTap: () async {
+                if (await canLaunch(track.url)) {
+                  launch(track.url);
+                } else {
+                  Fluttertoast.showToast(
+                      msg: 'Could not open the track.',
+                      fontSize: 14,
+                      toastLength: Toast.LENGTH_LONG,
+                      timeInSecForIosWeb: 2,
+                      textColor: Colors.white,
+                      backgroundColor: Colors.redAccent);
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }

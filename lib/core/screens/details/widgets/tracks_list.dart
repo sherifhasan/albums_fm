@@ -1,7 +1,7 @@
-import 'package:appsfactory_task/core/screens/details/widgets/track_item.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/track.dart';
+import 'track_item.dart';
 
 class TracksList extends StatelessWidget {
   const TracksList(this.tracksList, {Key? key}) : super(key: key);
@@ -11,7 +11,6 @@ class TracksList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: tracksList.length,
-        scrollDirection: Axis.vertical,
         itemBuilder: (BuildContext context, int index) =>
             TrackItem(tracksList[index]));
   }
