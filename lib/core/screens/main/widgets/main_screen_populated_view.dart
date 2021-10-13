@@ -16,9 +16,7 @@ class MainScreenPopulatedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, mainAxisSpacing: 2.0),
+    return ListView.builder(
       itemCount: favouriteBox.values.toList().length,
       itemBuilder: (context, index) {
         return AlbumItem(favouriteBox.values.toList()[index].name,

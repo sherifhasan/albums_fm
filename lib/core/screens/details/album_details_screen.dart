@@ -85,9 +85,7 @@ class AlbumDetailsScreen extends StatelessWidget {
                       child: Text(
                         'No tracks found',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700),
+                            fontSize: 14, fontWeight: FontWeight.w700),
                       ),
                     ),
             ],
