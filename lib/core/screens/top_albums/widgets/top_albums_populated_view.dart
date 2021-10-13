@@ -29,7 +29,8 @@ class TopAlbumsScreenPopulatedView extends StatelessWidget {
             albums[index].imageList[3].text!.isNotEmpty) {
           imageUrl = albums[index].imageList[3].text!;
         }
-        return AlbumItem(albums[index].name, imageUrl, openDetails: () {
+        return AlbumItem(albums[index].name, networkImageUrl: imageUrl,
+            openDetails: () {
           store.dispatch(AlbumDetailsFetchAction(
               albums[index].artist.name, albums[index].name));
         });

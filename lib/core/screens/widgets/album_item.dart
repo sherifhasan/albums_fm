@@ -2,13 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class AlbumItem extends StatelessWidget {
-  const AlbumItem(this.albumName, this.imageUrl, {Key? key, this.openDetails})
+  const AlbumItem(this.albumName,
+      {Key? key, this.networkImageUrl, this.openDetails})
       : super(key: key);
 
   final VoidCallback? openDetails;
 
   final String albumName;
-  final String imageUrl;
+  final String? networkImageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +32,29 @@ class AlbumItem extends StatelessWidget {
                       aspectRatio: 2,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
-                        child: CachedNetworkImage(
-                          imageUrl: imageUrl,
-                          fit: BoxFit.fitWidth,
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Center(
-                            child: SizedBox(
-                              height: 32,
-                              width: 32,
-                              child: CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                            ),
-                          ),
-                          errorWidget: (context, url, error) => Center(
-                            child: Column(
-                              children: const [
-                                Icon(Icons.error),
-                                Text('No image available')
-                              ],
-                            ),
-                          ),
-                        ),
+                        child: networkImageUrl != null
+                            ? CachedNetworkImage(
+                                imageUrl: networkImageUrl!,
+                                fit: BoxFit.fitWidth,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) => Center(
+                                  child: SizedBox(
+                                    height: 32,
+                                    width: 32,
+                                    child: CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  "assets/image_not_found.png",
+                                  height: 100,
+                                ),
+                              )
+                            : Image.asset(
+                                "assets/image_not_found.png",
+                                height: 100,
+                              ),
                       ),
                     ),
                     Row(

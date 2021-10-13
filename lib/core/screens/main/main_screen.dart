@@ -38,7 +38,7 @@ class MainScreen extends StatelessWidget {
 
   Widget _buildVisible(Store<AppState> store) {
     if (favouriteBox.keys.isNotEmpty) {
-      return MainScreenPopulatedView(favouriteBox.values.toList(), store);
+      return MainScreenPopulatedView(store);
     } else {
       return const MainScreenEmptyView();
     }
